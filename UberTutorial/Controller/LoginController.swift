@@ -18,24 +18,24 @@ class LoginController: UIViewController {
         return label
     }()
 
-    private let emailContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "")
-        imageView.alpha = 0.87
-        view.addSubview(imageView)
+    private lazy var emailContainerView: UIView = {
+      let view =  UIView().inputContainerView(image: UIImage(named: "ic_mail_outline_white_2x"),
+                                           textField: passwordTextField)
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return view
     }()
 
     private let emailTextField: UITextField = {
-        let tf = UITextField()
-        tf.borderStyle = .none
-        tf.font = UIFont.systemFont(ofSize: 16)
-        tf.textColor = .white
-        tf.keyboardAppearance = .dark
-        tf.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        return tf
+        return UITextField().textField(withPlaceHolder: "Email", isSecureTextEntry: false)
+    }()
+
+    private lazy var passwordContainerView: UIView = {
+        return UIView().inputContainerView(image: UIImage(named: "ic_lock_outline_white_2x"),
+                                           textField: passwordTextField)
+    }()
+
+    private let passwordTextField: UITextField = {
+        return UITextField().textField(withPlaceHolder: "Password", isSecureTextEntry: true)
     }()
 
     // MARK: - Lifecycle
@@ -47,8 +47,11 @@ class LoginController: UIViewController {
         titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor)
         titleLabel.centerX(inView: view)
 
-        view.addSubview(emailContainerView)
-        emailContainerView.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 16, paddingRight: 16, height: 50)
+
+        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView])
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.spacing = 16
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
