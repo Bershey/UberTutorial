@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class SignUpController: UIViewController {
     // MARK: - Properties
@@ -35,7 +36,7 @@ class SignUpController: UIViewController {
     
     private lazy var passwordContainerView: UIView = {
         let view =  UIView().inputContainerView(image: UIImage(named: "ic_lock_outline_white_2x"),
-                                                textField: emailTextField)
+                                                textField: passwordTextField)
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return view
     }()
@@ -70,14 +71,14 @@ class SignUpController: UIViewController {
         let button = AuthButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return button
     }()
 
     let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: "Already have an account?", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
-                                                                                                       NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+                                                                                                         NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16),
                                                                                   NSAttributedString.Key.foregroundColor: UIColor.mainBlueTint]))
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
@@ -92,6 +93,33 @@ class SignUpController: UIViewController {
     }
 
     // MARK: - Selectors
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let fullname = fullnameTextField.text else { return }
+        let accountTypeIndex = accountTypeSegmentedControl.selectedSegmentIndex
+
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print("Failed to register user with error \(error)")
+                return
+            }
+            guard let uid = result?.user.uid else { return }
+
+            let values = ["email": email,
+                          "fullname": fullname,
+                          "accountType": accountTypeIndex] as [String: Any]
+
+            Database.database().reference().child("users").child(uid).updateChildValues(values, withCompletionBlock:  {error, ref in
+                guard let controller = UIApplication.shared.windows.filter {$0.isKeyWindow}.first as? HomeController
+                else { return }
+                controller.configureUI()
+                    self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
+            })                                                                                        }
+        }
+    
+
     @objc func handleShowLogin() {
         navigationController?.popViewController(animated: true)
     }
