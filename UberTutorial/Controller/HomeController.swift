@@ -15,6 +15,7 @@ class HomeController: UIViewController {
     private let locationManager = CLLocationManager()
 
     private let inputActivationView = LocationInputActivationView()
+    private let locationInputView = LocationInputView()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -66,6 +67,19 @@ class HomeController: UIViewController {
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
     }
+
+    func configureLocationInputView() {
+        locationInputView.delegate = self
+        view.addSubview(locationInputView)
+        locationInputView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 200)
+        locationInputView.alpha = 0
+        UIView.animate(withDuration: 0.5, animations: {
+            self.locationInputView.alpha = 1
+        }) { _ in
+            print("テーブルが現れた")
+        }
+
+    }
 }
 
 // MARK: - Location Services
@@ -102,10 +116,28 @@ extension HomeController: CLLocationManagerDelegate {
 }
 
 
+// MARK: - LocationInputActivationViewDelegate
+
 extension HomeController: LocationInputActivationViewDelegate {
     func presentLocationInputView() {
-print("インプットがおされた")
+        inputActivationView.alpha = 0
+configureLocationInputView()
+    }
+}
+
+// MARK: - LocationInputActivationViewDelegate
+
+extension HomeController: LocationInputViewDelegate {
+    func dissmissLocationInputView() {
+        UIView.animate(withDuration: 0.3) {
+            self.locationInputView.alpha = 0
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.inputActivationView.alpha = 1
+            }
+        }
+
     }
 
-    
+
 }

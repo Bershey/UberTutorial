@@ -20,6 +20,7 @@
 		8F61B4F0270E95E7009B1A6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F61B4EF270E95E7009B1A6A /* GoogleService-Info.plist */; };
 		8F61B4F2270E9A1D009B1A6A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F61B4F1270E9A1D009B1A6A /* HomeController.swift */; };
 		8FAB1CC0270EBAF7006F4C86 /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CBF270EBAF7006F4C86 /* LocationInputActivationView.swift */; };
+		8FAB1CC2270ED24D006F4C86 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC1270ED24D006F4C86 /* LocationInputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		8F61B4EF270E95E7009B1A6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8F61B4F1270E9A1D009B1A6A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		8FAB1CBF270EBAF7006F4C86 /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
+		8FAB1CC1270ED24D006F4C86 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
 		D8C4DAFD6B1AA70D8F944377 /* Pods_UberTutorial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberTutorial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 			children = (
 				8F61B4DA270DCB8B009B1A6A /* AuthButton.swift */,
 				8FAB1CBF270EBAF7006F4C86 /* LocationInputActivationView.swift */,
+				8FAB1CC1270ED24D006F4C86 /* LocationInputView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				8F61B4D9270DA683009B1A6A /* SignUpController.swift in Sources */,
 				8F61B4DB270DCB8B009B1A6A /* AuthButton.swift in Sources */,
 				8F61B4F2270E9A1D009B1A6A /* HomeController.swift in Sources */,
+				8FAB1CC2270ED24D006F4C86 /* LocationInputView.swift in Sources */,
 				8F0E8978270C807B000A2F93 /* AppDelegate.swift in Sources */,
 				8F0E8991270C8115000A2F93 /* LoginController.swift in Sources */,
 				8F0E897A270C807B000A2F93 /* SceneDelegate.swift in Sources */,
