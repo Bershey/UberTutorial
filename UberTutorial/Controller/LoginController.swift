@@ -74,7 +74,7 @@ class LoginController: UIViewController {
                 print("失敗,\(error)")
                 return
             }
-            guard let controller = UIApplication.shared.windows.filter({$0.isKeyWindow}).first as? HomeController
+            guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController
             else { return }
             controller.configureUI()
                 self.dismiss(animated: true, completion: nil)

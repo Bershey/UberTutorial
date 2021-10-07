@@ -111,7 +111,8 @@ class SignUpController: UIViewController {
                           "accountType": accountTypeIndex] as [String: Any]
 
             Database.database().reference().child("users").child(uid).updateChildValues(values, withCompletionBlock:  {error, ref in
-                guard let controller = UIApplication.shared.windows.filter {$0.isKeyWindow}.first as? HomeController
+                guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController
+
                 else { return }
                 controller.configureUI()
                     self.dismiss(animated: true, completion: nil)

@@ -14,6 +14,8 @@ class HomeController: UIViewController {
     private let mapView = MKMapView()
     private let locationManager = CLLocationManager()
 
+    private let inputActivationView = LocationInputActivationView()
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,7 @@ class HomeController: UIViewController {
             DispatchQueue.main.async {
                 let nav = UINavigationController(rootViewController: LoginController())
                 nav.modalPresentationStyle = .fullScreen
-                    self.present(nav, animated: true, completion: nil)
+                self.present(nav, animated: true, completion: nil)
             }
         } else {
             configureUI()
@@ -44,8 +46,25 @@ class HomeController: UIViewController {
     // MARK: - Helpers
 
     func configureUI() {
+        configureMapView()
+        view.addSubview(inputActivationView)
+        inputActivationView.centerX(inView: view)
+        inputActivationView.setDimensions(height: 50, width: view.frame.width - 64)
+        inputActivationView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        inputActivationView.alpha = 0
+        inputActivationView.delegate = self
+
+        UIView.animate(withDuration: 2) {
+            self.inputActivationView.alpha = 1
+        }
+    }
+
+    func configureMapView() {
         view.addSubview(mapView)
         mapView.frame = view.frame
+
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
     }
 }
 
@@ -82,3 +101,11 @@ extension HomeController: CLLocationManagerDelegate {
 
 }
 
+
+extension HomeController: LocationInputActivationViewDelegate {
+    func presentLocationInputView() {
+print("インプットがおされた")
+    }
+
+    
+}
