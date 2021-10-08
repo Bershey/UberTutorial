@@ -14,14 +14,14 @@ private let reuseIdentifier = "LocationCell"
 class HomeController: UIViewController {
     // MARK: - Properties
     private let mapView = MKMapView()
-    private let locationManager = CLLocationManager()
+    private let locationManager = LocationHandler.shared.locationManager
 
     private let inputActivationView = LocationInputActivationView()
     private let locationInputView = LocationInputView()
     private let tableView = UITableView()
 
-    private var fullname: String? {
-        didSet { locationInputView.titleLabel.text = fullname }
+    private var user: User? {
+        didSet { locationInputView.user = user }
     }
 
     private final let locationInputViewHeight: CGFloat = 200
@@ -31,13 +31,14 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         ckeckIfUserIsLoggedIn()
         enableLocationServices()
-        fetchUserData()
+//        fetchUserData()
+        signOut()
     }
     // MARK: - API
 
     func fetchUserData() {
-        Service.shared.fetchUserData { fullname in
-            self.fullname = fullname
+        Service.shared.fetchUserData { user in
+            self.user = user
         }
     }
 
@@ -58,6 +59,9 @@ class HomeController: UIViewController {
     func signOut() {
         do {
             try Auth.auth().signOut()
+            let nav = UINavigationController(rootViewController: LoginController())
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
         } catch {
             print("ログアウト失敗")
         }
@@ -118,36 +122,26 @@ class HomeController: UIViewController {
 }
 
 // MARK: - Location Services
-extension HomeController: CLLocationManagerDelegate {
+extension HomeController {
     func enableLocationServices() {
-        locationManager.delegate = self
-
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined:
             print("決定されてない")
-            locationManager.requestWhenInUseAuthorization()
+            locationManager?.requestWhenInUseAuthorization()
         case .restricted, .denied:
             break
         case .authorizedAlways:
             print("いつでもOK")
-            locationManager.startUpdatingHeading()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager?.startUpdatingHeading()
+            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         case .authorizedWhenInUse:
             print("ユーザーが許可したときだけOK")
-            locationManager.requestAlwaysAuthorization()
+            locationManager?.requestAlwaysAuthorization()
 
         default:
             break
         }
     }
-
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.requestAlwaysAuthorization()
-        }
-    }
-
-
 }
 
 

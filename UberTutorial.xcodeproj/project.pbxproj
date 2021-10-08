@@ -23,6 +23,8 @@
 		8FAB1CC2270ED24D006F4C86 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC1270ED24D006F4C86 /* LocationInputView.swift */; };
 		8FAB1CC4270EEF17006F4C86 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC3270EEF17006F4C86 /* LocationCell.swift */; };
 		8FAB1CC6270F1E67006F4C86 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC5270F1E67006F4C86 /* Service.swift */; };
+		8FAB1CC8270FD17F006F4C86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC7270FD17F006F4C86 /* User.swift */; };
+		8FAB1CCA270FF0A4006F4C86 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC9270FF0A4006F4C86 /* LocationHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		8FAB1CC1270ED24D006F4C86 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
 		8FAB1CC3270EEF17006F4C86 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		8FAB1CC5270F1E67006F4C86 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		8FAB1CC7270FD17F006F4C86 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8FAB1CC9270FF0A4006F4C86 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		D8C4DAFD6B1AA70D8F944377 /* Pods_UberTutorial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberTutorial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -109,6 +113,7 @@
 		8F0E898B270C809D000A2F93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8FAB1CC7270FD17F006F4C86 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				8F0E8992270C8474000A2F93 /* Extensions.swift */,
+				8FAB1CC9270FF0A4006F4C86 /* LocationHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -281,7 +287,9 @@
 				8F0E8978270C807B000A2F93 /* AppDelegate.swift in Sources */,
 				8F0E8991270C8115000A2F93 /* LoginController.swift in Sources */,
 				8FAB1CC4270EEF17006F4C86 /* LocationCell.swift in Sources */,
+				8FAB1CCA270FF0A4006F4C86 /* LocationHandler.swift in Sources */,
 				8F0E897A270C807B000A2F93 /* SceneDelegate.swift in Sources */,
+				8FAB1CC8270FD17F006F4C86 /* User.swift in Sources */,
 				8FAB1CC6270F1E67006F4C86 /* Service.swift in Sources */,
 				8FAB1CC0270EBAF7006F4C86 /* LocationInputActivationView.swift in Sources */,
 				8F0E8993270C8474000A2F93 /* Extensions.swift in Sources */,

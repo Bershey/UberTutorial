@@ -5,13 +5,14 @@
 //  Created by minmin on 2021/10/06.
 //
 
-import Foundation
 import UIKit
 import Firebase
+import GeoFire
 
 class SignUpController: UIViewController {
     // MARK: - Properties
-    
+    private var location = LocationHandler.shared.locationManager.location
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "UBER"
@@ -90,6 +91,7 @@ class SignUpController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+
     }
 
     // MARK: - Selectors
@@ -105,20 +107,21 @@ class SignUpController: UIViewController {
                 return
             }
             guard let uid = result?.user.uid else { return }
-
             let values = ["email": email,
                           "fullname": fullname,
                           "accountType": accountTypeIndex] as [String: Any]
+            if accountTypeIndex == 1 {
+                let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
+                guard let location = self.location else { return }
+                
+                geofire.setLocation(location, forKey: uid, withCompletionBlock: { error in
+                    self.uploadUserDataAndShowHomeController(uid: uid, values: values)
+                })
+            }
+            self.uploadUserDataAndShowHomeController(uid: uid, values: values)
 
-            Database.database().reference().child("users").child(uid).updateChildValues(values, withCompletionBlock:  {error, ref in
-                guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController
-
-                else { return }
-                controller.configureUI()
-                    self.dismiss(animated: true, completion: nil)
-                    self.dismiss(animated: true, completion: nil)
-            })                                                                                        }
         }
+    }
     
 
     @objc func handleShowLogin() {
@@ -127,6 +130,15 @@ class SignUpController: UIViewController {
 
     
     // MARK: - Helpers
+    func uploadUserDataAndShowHomeController(uid: String, values: [String: Any]) {
+        REF_USERS.child(uid).updateChildValues(values, withCompletionBlock:  {error, ref in
+            guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController
+            else { return }
+            controller.configureUI()
+            self.dismiss(animated: true, completion: nil)
+        })
+    }
+
     func configureUI() {
         view.backgroundColor = .backgroundColor
         view.addSubview(titleLabel)
