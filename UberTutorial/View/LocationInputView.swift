@@ -25,7 +25,6 @@ class LocationInputView: UIView {
 
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "StePah dowless"
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 16)
         return label
