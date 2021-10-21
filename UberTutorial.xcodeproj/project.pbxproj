@@ -25,6 +25,7 @@
 		8FAB1CC6270F1E67006F4C86 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC5270F1E67006F4C86 /* Service.swift */; };
 		8FAB1CC8270FD17F006F4C86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC7270FD17F006F4C86 /* User.swift */; };
 		8FAB1CCA270FF0A4006F4C86 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAB1CC9270FF0A4006F4C86 /* LocationHandler.swift */; };
+		8FF191AD2721A09800EFC810 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF191AC2721A09800EFC810 /* DriverAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		8FAB1CC5270F1E67006F4C86 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		8FAB1CC7270FD17F006F4C86 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8FAB1CC9270FF0A4006F4C86 /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
+		8FF191AC2721A09800EFC810 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
 		D8C4DAFD6B1AA70D8F944377 /* Pods_UberTutorial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberTutorial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				8FAB1CC7270FD17F006F4C86 /* User.swift */,
+				8FF191AC2721A09800EFC810 /* DriverAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				8F61B4DB270DCB8B009B1A6A /* AuthButton.swift in Sources */,
 				8F61B4F2270E9A1D009B1A6A /* HomeController.swift in Sources */,
 				8FAB1CC2270ED24D006F4C86 /* LocationInputView.swift in Sources */,
+				8FF191AD2721A09800EFC810 /* DriverAnnotation.swift in Sources */,
 				8F0E8978270C807B000A2F93 /* AppDelegate.swift in Sources */,
 				8F0E8991270C8115000A2F93 /* LoginController.swift in Sources */,
 				8FAB1CC4270EEF17006F4C86 /* LocationCell.swift in Sources */,

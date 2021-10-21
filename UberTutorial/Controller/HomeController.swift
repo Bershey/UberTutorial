@@ -31,14 +31,24 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         ckeckIfUserIsLoggedIn()
         enableLocationServices()
-//        fetchUserData()
-        signOut()
+        fetchUserData()
+        fetchDrivers()
     }
     // MARK: - API
 
     func fetchUserData() {
-        Service.shared.fetchUserData { user in
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        Service.shared.fetchUserData(uid: currentUid) { user in
             self.user = user
+        }
+    }
+
+    func fetchDrivers() {
+        guard let location = locationManager?.location else { return }
+        Service.shared.fetchDrivers(location: location) { driver in
+            guard let cordinate = driver.location?.coordinate else { return }
+            let annotation = DriverAnnotation(uid: driver.uid, cordinate: cordinate)
+            self.mapView.addAnnotation(annotation)
         }
     }
 
@@ -48,8 +58,6 @@ class HomeController: UIViewController {
                 let nav = UINavigationController(rootViewController: LoginController())
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
-//                    configureUI()
-
             }
         } else {
             configureUI()
@@ -91,6 +99,7 @@ class HomeController: UIViewController {
 
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
+        mapView.delegate = self
     }
 
     func configureLocationInputView() {
