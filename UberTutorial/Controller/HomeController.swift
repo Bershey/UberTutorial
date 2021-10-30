@@ -10,6 +10,7 @@ import Firebase
 import MapKit
 
 private let reuseIdentifier = "LocationCell"
+private let annotationIdenfitier = "DriveAnnotation"
 
 class HomeController: UIViewController {
     // MARK: - Properties
@@ -49,6 +50,20 @@ class HomeController: UIViewController {
             guard let cordinate = driver.location?.coordinate else { return }
             let annotation = DriverAnnotation(uid: driver.uid, cordinate: cordinate)
             self.mapView.addAnnotation(annotation)
+            var driverIsVisible: Bool {
+                return self.mapView.annotations.contains(where: {annotation -> Bool in
+                    guard let driverAnno = annotation as? DriverAnnotation else { return false }
+                    if driverAnno.uid == driver.uid {
+                        driverAnno.updateAnnotationPosition(withCordinate: cordinate)
+                    
+                        return true
+                    }
+                    return false
+                })
+            }
+            if !driverIsVisible {
+                self.mapView.addAnnotation(annotation)
+            }
         }
     }
 
@@ -181,9 +196,18 @@ extension HomeController: LocationInputViewDelegate {
     }
 }
 
+extension HomeController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? DriverAnnotation {
+          let view = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdenfitier)
+            view.image = UIImage(named: "chevron-sign-to-right")
+            return view
+        }
+        return nil
+    }
+}
+
 // MARK: - UITableViewDelegate, UITableViewDataSource
-
-
 
 extension HomeController: UITableViewDelegate, UITableViewDataSource {
 

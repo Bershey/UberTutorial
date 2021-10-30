@@ -5,7 +5,7 @@
 //  Created by minmin on 2021/10/08.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 struct User {
@@ -20,6 +20,5 @@ struct User {
         self.fullname = dictonary["fullname"] as? String ?? ""
         self.email = dictonary["email"] as? String ?? ""
         self.accountType = dictonary["accoutType"] as? Int ?? 0
-
     }
 }
